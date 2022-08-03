@@ -1,9 +1,8 @@
 # sponsors
 
 Generates and updates the [sponsors.md](sponsors.md) list, which is 
-embedded by a pair of separators in this readme like:
+embedded by a pair of separators so it looks like this:
 
-```
 <!-- sponsors -->
 
 <a href='https://github.com/KirillOsenkov'>
