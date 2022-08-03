@@ -1,0 +1,107 @@
+gh auth status
+
+$query = gh api graphql --paginate -f owner='devlooped' -f query='
+query ($owner: String!, $endCursor: String) {
+  organization(login: $owner) {
+    sponsorshipsAsMaintainer(first: 100, after: $endCursor, includePrivate: false) {
+      nodes {
+        sponsorEntity {
+          ... on Organization {
+            id
+            login
+            name
+            avatarUrl
+            teamsUrl
+          }
+          ... on User {
+            id
+            login
+            name
+            avatarUrl
+          }
+        }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}'
+
+$sponsors = 
+    $query | 
+    ConvertFrom-Json | 
+    select @{ Name='nodes'; Expression={$_.data.organization.sponsorshipsAsMaintainer.nodes}} | 
+    select -ExpandProperty nodes;
+
+$organizations = $sponsors | where { $_.sponsorEntity.teamsUrl -ne $null } | select -ExpandProperty sponsorEntity;
+$users = $sponsors | where { $_.sponsorEntity.teamsUrl -eq $null } | select -ExpandProperty sponsorEntity;
+
+mkdir ".github/avatars" -ErrorAction Ignore
+
+foreach ($node in $organizations) {
+  $img = iwr ($node.avatarUrl + "&s=70");
+  $type = $img.Headers["Content-Type"];
+  $base64 = [convert]::ToBase64String($img.Content);
+  $svg = "<svg xmlns='http://www.w3.org/2000/svg' fill='none' width='38' height='38'>
+	<foreignObject width='100%' height='100%'>
+		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
+			<style>
+        img {
+          border-style: none;
+          border-radius: 6px;
+          box-shadow: 0 0 0 1px lightgrey;
+        }
+			</style>
+      <img width='35' height='35' src='data:$($type);base64,$($base64)' />   
+		</div>
+	</foreignObject>
+</svg>";
+
+  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
+  write-host "=> $($node.login).svg" -ForegroundColor Green;
+}
+
+foreach ($node in $users) {
+  $img = iwr ($node.avatarUrl + "&s=70");
+  $type = $img.Headers["Content-Type"];
+  $base64 = [convert]::ToBase64String($img.Content);
+  $svg = "<svg xmlns='http://www.w3.org/2000/svg' fill='none' width='38' height='38'>
+	<foreignObject width='100%' height='100%'>
+		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
+			<style>
+        img {
+          border-style: none;
+          border-radius: 50% !important;
+          box-shadow: 0 0 0 1px lightgrey;
+
+        }            
+			</style>
+      <img width='35' height='35' src='data:$($type);base64,$($base64)' />
+		</div>
+	</foreignObject>
+</svg>";
+
+  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
+  write-host "=> $($node.login).svg" -ForegroundColor DarkGray;
+}
+
+$links = "";
+
+foreach ($sponsor in $sponsors) {
+  $links += "<a href='https://github.com/$($sponsor.sponsorEntity.login)'>
+  <img src='https://github.com/devlooped/sponsors/raw/main/.github/avatars/$($sponsor.sponsorEntity.login).svg' alt='$($sponsor.sponsorEntity.name)' title='$($sponsor.sponsorEntity.name)'>
+</a>`n";
+}
+
+$links = "<!-- sponsors -->`n`n$($links)`n<!-- sponsors -->";
+$links | Out-File .\sponsors.md -Force -Encoding UTF8
+$readme = Get-Content .\readme.md -Raw;
+$regex = '<!-- sponsors -->[\s\S]*<!-- sponsors -->'
+
+if ($readme -match $regex) {
+  $readme -replace $regex,$links | Out-File .\readme.md -Force -Encoding UTF8
+} else {
+  Write-Error "Could not find sponsors section in readme.md"
+}

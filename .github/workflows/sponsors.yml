@@ -1,0 +1,35 @@
+# refresh list of sponsors
+name: sponsors
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 23 * * *"
+
+jobs:
+  sponsors:
+    runs-on: windows-latest
+    steps:
+      - name: 🤘 checkout
+        uses: actions/checkout@v2
+
+      - name: 🔽 gh 
+        run: |
+          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+          scoop install gh
+
+      - name: 💛 sponsors
+        run: ./.github/workflows/sponsors.ps1
+        env:
+          GH_TOKEN: ${{ secrets.DEVLOOPED_TOKEN }}
+
+      - name: ✍ pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          base: main
+          branch: sponsors
+          delete-branch: true
+          labels: dependencies
+          commit-message: "💛 Refresh sponsors"
+          title: "💛 Refresh sponsors"
+          body: "Sponsors list updated"
+          token: ${{ secrets.BOT_TOKEN }}
