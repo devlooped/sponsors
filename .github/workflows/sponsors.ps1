@@ -97,11 +97,3 @@ foreach ($sponsor in $sponsors) {
 
 $links = "<!-- sponsors -->`n`n$($links)`n<!-- sponsors -->";
 $links | Out-File .\sponsors.md -Force -Encoding UTF8
-$readme = Get-Content .\readme.md -Raw;
-$regex = '<!-- sponsors -->[\s\S]*<!-- sponsors -->'
-
-if ($readme -match $regex) {
-  $readme -replace $regex,$links | Out-File .\readme.md -Force -Encoding UTF8
-} else {
-  Write-Error "Could not find sponsors section in readme.md"
-}
