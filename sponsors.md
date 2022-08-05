@@ -1,8 +1,4 @@
-<!-- sponsors -->
-
-<a href='https://github.com/KirillOsenkov'>
-  <img src='https://github.com/devlooped/sponsors/raw/main/.github/avatars/KirillOsenkov.svg' alt='Kirill Osenkov' title='Kirill Osenkov'>
-</a>
+[![Kirill Osenkov](https://github.com/devlooped/sponsors/raw/main/.github/avatars/KirillOsenkov.svg)](https://github.com/KirillOsenkov)
 <a href='https://github.com/augustoproiete'>
   <img src='https://github.com/devlooped/sponsors/raw/main/.github/avatars/augustoproiete.svg' alt='C. Augusto Proiete' title='C. Augusto Proiete'>
 </a>
