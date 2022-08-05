@@ -94,7 +94,7 @@ foreach ($node in $users) {
 $links = "";
 
 foreach ($sponsor in $sponsors) {
-  $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).svg `"$($sponsor.sponsorEntity.name))`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
+  $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).png `"$($sponsor.sponsorEntity.name))`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
 }
 
 $links | Out-File .\sponsors.md -Force -Encoding UTF8
