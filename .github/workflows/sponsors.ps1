@@ -90,9 +90,7 @@ foreach ($node in $users) {
 $links = "";
 
 foreach ($sponsor in $sponsors) {
-  $links += "<a href='https://github.com/$($sponsor.sponsorEntity.login)'>
-  <img src='https://github.com/devlooped/sponsors/raw/main/.github/avatars/$($sponsor.sponsorEntity.login).svg' alt='$($sponsor.sponsorEntity.name)' title='$($sponsor.sponsorEntity.name)'>
-</a>`n";
+  $links += "[![$($sponsor.sponsorEntity.name)](https://github.com/devlooped/sponsors/raw/main/.github/avatars/$($sponsor.sponsorEntity.login).svg "$($sponsor.sponsorEntity.name)")](https://github.com/$($sponsor.sponsorEntity.login)`n";
 }
 
 $links = "<!-- sponsors -->`n`n$($links)`n<!-- sponsors -->";
