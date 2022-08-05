@@ -93,5 +93,4 @@ foreach ($sponsor in $sponsors) {
   $links += "[![$($sponsor.sponsorEntity.name)](https://github.com/devlooped/sponsors/raw/main/.github/avatars/$($sponsor.sponsorEntity.login)).svg `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
 }
 
-$links = "<!-- sponsors -->`n`n$($links)`n<!-- sponsors -->";
 $links | Out-File .\sponsors.md -Force -Encoding UTF8
