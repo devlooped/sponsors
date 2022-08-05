@@ -12,11 +12,6 @@ jobs:
       - name: 🤘 checkout
         uses: actions/checkout@v2
 
-      - name: 🔽 gh 
-        run: |
-          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-          scoop install gh
-
       - name: 🔽 html2image
         run: pip install --upgrade html2image
 
