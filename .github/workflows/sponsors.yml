@@ -17,6 +17,9 @@ jobs:
           iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
           scoop install gh
 
+      - name: 🔽 html2image
+        run: pip install --upgrade html2image
+
       - name: 💛 sponsors
         run: ./.github/workflows/sponsors.ps1
         env:

@@ -1,5 +1,9 @@
 gh auth status
 
+foreach ($file in (Get-ChildItem -Recurse -Path *.md)) {
+  $file.BaseName
+}
+
 $query = gh api graphql --paginate -f owner='devlooped' -f query='
 query ($owner: String!, $endCursor: String) {
   organization(login: $owner) {
@@ -94,3 +98,6 @@ foreach ($sponsor in $sponsors) {
 }
 
 $links | Out-File .\sponsors.md -Force -Encoding UTF8
+
+Push-Location .github\avatars
+Get-ChildItem *.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --size 38,38 }
