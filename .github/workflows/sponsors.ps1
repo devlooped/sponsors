@@ -1,9 +1,5 @@
 gh auth status
 
-foreach ($file in (Get-ChildItem -Recurse -Path *.md)) {
-  $file.BaseName
-}
-
 $query = gh api graphql --paginate -f owner='devlooped' -f query='
 query ($owner: String!, $endCursor: String) {
   organization(login: $owner) {
@@ -33,8 +29,7 @@ query ($owner: String!, $endCursor: String) {
   }
 }'
 
-$sponsors = 
-    $query | 
+$sponsors = $query | 
     ConvertFrom-Json | 
     select @{ Name='nodes'; Expression={$_.data.organization.sponsorshipsAsMaintainer.nodes}} | 
     select -ExpandProperty nodes;
