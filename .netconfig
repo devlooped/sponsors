@@ -15,8 +15,8 @@
 	weak
 [file ".github/workflows/dotnet-file.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/dotnet-file.yml
-	sha = ef47d782b45dbf3dc7f47f39168a2eed9c536a40
-	etag = 41db5ebfb3f06bf2a9d55919f50a10fa80057a0d636532beac3b77464c3c1b5d
+	sha = b9671b9e7f6235afbd8551dfedc1ab68a1a95c56
+	etag = 9f51b58651ad4e5bbd564475335aed876ec63f9e4d603d29862eb241ba3b7b0f
 	weak
 [file ".gitignore"]
 	url = https://github.com/devlooped/oss/blob/main/.gitignore
@@ -45,6 +45,6 @@
 	weak
 [file ".github/workflows/includes.yml"]
 	url = https://github.com/devlooped/oss/blob/main/.github/workflows/includes.yml
-	sha = 6a6d38b090c3a32ec64476681bd9e2ef0e66661a
-	etag = 7394fd706a975e87eaa5a44302351f6b85731df2627865fdb640eee6f8a9d515
+	sha = b9671b9e7f6235afbd8551dfedc1ab68a1a95c56
+	etag = 91c56f1354273c97e52d1756ebc94fa100045500199c87a3a53e708874a330c7
 	weak
