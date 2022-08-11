@@ -1,6 +1,10 @@
 # sponsors
 
-Generates and updates the [sponsors.md](sponsors.md) list:
+Generates and updates the [sponsors.md](sponsors.md) list included below.
+
+The list can be included directly by using the [resolve file includes](https://github.com/marketplace/actions/resolve-file-includes) 
+action and pointing the include to the [sponsors.md](https://github.com/devlooped/sponsors/raw/main/sponsors.md) or 
+the convenient [footer.md](https://github.com/devlooped/sponsors/raw/main/footer.md) (as `raw` links).
 
 <!-- include sponsors.md -->
 [![Clarius Org](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/clarius.png "Clarius Org")](https://github.com/clarius)
