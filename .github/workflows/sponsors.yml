@@ -9,17 +9,17 @@ jobs:
   sponsors:
     runs-on: windows-latest
     steps:
-      - name: 🔍 defaults
+      - name: 🤖 defaults
         uses: devlooped/actions-bot@v1
-        env:
-          GH_TOKEN_SECRET: ${{ secrets.GH_TOKEN }}
-          BOT_NAME_SECRET: ${{ secrets.BOT_NAME }}
-          BOT_EMAIL_SECRET: ${{ secrets.BOT_EMAIL }}
-          BOT_AUTHOR_SECRET: ${{ secrets.BOT_AUTHOR }}
+        with:
+          name: ${{ secrets.BOT_NAME }}
+          email: ${{ secrets.BOT_EMAIL }}
+          gh_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🤘 checkout
         uses: actions/checkout@v2
-        with:
+        with: 
           token: ${{ env.GH_TOKEN }}
 
       - name: 🔽 html2image
