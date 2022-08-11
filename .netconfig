@@ -43,8 +43,3 @@
 	sha = a0f58a6d63e48ae6e55944c556d0bc94476dc8df
 	etag = 2d47e2fc4fdfa3515203d452674566e3df507461f9938f451a06d79deb687d24
 	weak
-[file ".github/workflows/includes.yml"]
-	url = https://github.com/devlooped/oss/blob/main/.github/workflows/includes.yml
-	sha = b9671b9e7f6235afbd8551dfedc1ab68a1a95c56
-	etag = 91c56f1354273c97e52d1756ebc94fa100045500199c87a3a53e708874a330c7
-	weak

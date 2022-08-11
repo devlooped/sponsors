@@ -28,6 +28,9 @@ jobs:
       - name: 💛 sponsors
         run: ./.github/workflows/sponsors.ps1
 
+      - name: +Mᐁ includes
+        uses: devlooped/actions-include@v1
+
       - name: ✍ pull request
         uses: peter-evans/create-pull-request@v3
         with:
