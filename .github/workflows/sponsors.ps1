@@ -3,7 +3,7 @@ gh auth status
 $query = gh api graphql --paginate -f owner='devlooped' -f query='
 query ($owner: String!, $endCursor: String) {
   organization(login: $owner) {
-    sponsorshipsAsMaintainer(first: 100, after: $endCursor, includePrivate: false) {
+    sponsorshipsAsMaintainer(first: 100, after: $endCursor, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: false) {
       nodes {
         sponsorEntity {
           ... on Organization {
