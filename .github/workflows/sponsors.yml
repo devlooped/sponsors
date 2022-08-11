@@ -9,16 +9,24 @@ jobs:
   sponsors:
     runs-on: windows-latest
     steps:
+      - name: 🔍 defaults
+        uses: devlooped/actions-bot@v1
+        env:
+          GH_TOKEN_SECRET: ${{ secrets.GH_TOKEN }}
+          BOT_NAME_SECRET: ${{ secrets.BOT_NAME }}
+          BOT_EMAIL_SECRET: ${{ secrets.BOT_EMAIL }}
+          BOT_AUTHOR_SECRET: ${{ secrets.BOT_AUTHOR }}
+
       - name: 🤘 checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{ env.GH_TOKEN }}
 
       - name: 🔽 html2image
         run: pip install --upgrade html2image
 
       - name: 💛 sponsors
         run: ./.github/workflows/sponsors.ps1
-        env:
-          GH_TOKEN: ${{ secrets.DEVLOOPED_TOKEN }}
 
       - name: ✍ pull request
         uses: peter-evans/create-pull-request@v3
@@ -26,8 +34,10 @@ jobs:
           base: main
           branch: sponsors
           delete-branch: true
-          labels: dependencies
+          labels: docs
+          author: ${{ env.BOT_AUTHOR }}
+          committer: ${{ env.BOT_AUTHOR }}
           commit-message: "💛 Refresh sponsors"
           title: "💛 Refresh sponsors"
           body: "Sponsors list updated"
-          token: ${{ secrets.BOT_TOKEN }}
+          token: ${{ env.GH_TOKEN }}
