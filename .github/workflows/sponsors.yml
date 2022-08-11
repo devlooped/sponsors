@@ -7,7 +7,7 @@ on:
 
 jobs:
   sponsors:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 🤖 defaults
         uses: devlooped/actions-bot@v1
@@ -26,6 +26,7 @@ jobs:
         run: pip install --upgrade html2image
 
       - name: 💛 sponsors
+        shell: pwsh
         run: ./.github/workflows/sponsors.ps1
 
       - name: +Mᐁ includes
