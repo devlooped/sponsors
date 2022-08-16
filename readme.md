@@ -14,6 +14,7 @@ the convenient [footer.md](https://github.com/devlooped/sponsors/raw/main/footer
 [![MFB Technologies, Inc.](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/MFB-Technologies-Inc.png "MFB Technologies, Inc.")](https://github.com/MFB-Technologies-Inc)
 [![Amazon Web Services](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/aws.png "Amazon Web Services")](https://github.com/aws)
 [![SandRock](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/sandrock.png "SandRock")](https://github.com/sandrock)
+[![David Pallmann](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/davidpallmann.png "David Pallmann")](https://github.com/davidpallmann)
 
 
 <!-- sponsors.md -->
