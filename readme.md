@@ -1,4 +1,5 @@
-# sponsors
+![Sponsors](https://raw.githubusercontent.com/devlooped/sponsors/main/assets/sponsors.svg) Sponsors
+===
 
 Generates and updates the [sponsors.md](sponsors.md) list included below.
 
