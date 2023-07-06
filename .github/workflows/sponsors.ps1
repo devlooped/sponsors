@@ -97,5 +97,5 @@ write-host "Using chrome from $env:chrome"
 
 Push-Location .github\avatars
 # For some reason we get a black background for clarius' avatar, so we exclude it
-Get-ChildItem *.svg -exclude clarius.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --size 38,38 --browser $env:chrome }
+Get-ChildItem *.svg -exclude clarius.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --size 38,38 --chrome_path $env:chrome }
 Pop-Location
