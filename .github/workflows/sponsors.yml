@@ -22,12 +22,20 @@ jobs:
         with: 
           token: ${{ env.GH_TOKEN }}
 
+      - name: 🌐 chrome
+        uses: browser-actions/setup-chrome@v1
+        id: chrome
+        with:
+          chrome-version: 1000141
+
       - name: 🔽 html2image
         run: pip install --upgrade html2image
 
       - name: 💜 sponsors
         shell: pwsh
         run: ./.github/workflows/sponsors.ps1
+        env:
+          chrome: ${{ steps.chrome.outputs.chrome-path }}
 
       - name: +Mᐁ includes
         uses: devlooped/actions-include@v1

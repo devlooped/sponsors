@@ -74,7 +74,6 @@ foreach ($node in $users) {
           border-style: none;
           border-radius: 50% !important;
           box-shadow: 0 0 0 1px lightgrey;
-
         }            
 			</style>
       <img width='35' height='35' src='data:$($type);base64,$($base64)' />
@@ -95,5 +94,5 @@ foreach ($sponsor in $sponsors) {
 $links | Out-File .\sponsors.md -Force -Encoding UTF8
 
 Push-Location .github\avatars
-Get-ChildItem *.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --size 38,38 }
+Get-ChildItem *.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --size 38,38 --browser $env:chrome }
 Pop-Location
