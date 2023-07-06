@@ -94,5 +94,6 @@ foreach ($sponsor in $sponsors) {
 $links | Out-File .\sponsors.md -Force -Encoding UTF8
 
 Push-Location .github\avatars
-Get-ChildItem *.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --size 38,38 --browser $env:chrome }
+# For some reason we get a black background for clarius' avatar, so we exclude it
+Get-ChildItem *.svg -exclude clarius.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --size 38,38 --browser $env:chrome }
 Pop-Location

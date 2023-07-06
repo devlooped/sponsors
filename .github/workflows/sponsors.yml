@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       chrome:
+        # Lookup version at https://chromereleases.googleblog.com/
+        # Then search by version number at https://omahaproxy.appspot.com/
+        # Then find the closest position to the Base Branch Position at 
+        # https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Linux_x64/
         description: Chrome Position
   schedule:
     - cron: "0 23 * * *"
