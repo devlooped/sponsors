@@ -26,7 +26,7 @@ jobs:
         uses: browser-actions/setup-chrome@v1
         id: chrome
         with:
-          chrome-version: 1000141
+          chrome-version: 1097306
 
       - name: 🔽 html2image
         run: pip install --upgrade html2image
