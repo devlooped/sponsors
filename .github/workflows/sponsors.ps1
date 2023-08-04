@@ -43,7 +43,7 @@ foreach ($node in $organizations) {
   $img = iwr ($node.avatarUrl + "&s=70");
   $type = $img.Headers["Content-Type"];
   $base64 = [convert]::ToBase64String($img.Content);
-  $svg = "<svg xmlns='http://www.w3.org/2000/svg' fill='none' width='38' height='38'>
+  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
 	<foreignObject width='100%' height='100%'>
 		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
 			<style>
@@ -66,7 +66,7 @@ foreach ($node in $users) {
   $img = iwr ($node.avatarUrl + "&s=70");
   $type = $img.Headers["Content-Type"];
   $base64 = [convert]::ToBase64String($img.Content);
-  $svg = "<svg xmlns='http://www.w3.org/2000/svg' fill='none' width='38' height='38'>
+  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
 	<foreignObject width='100%' height='100%'>
 		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
 			<style>
@@ -96,6 +96,5 @@ $links | Out-File .\sponsors.md -Force -Encoding UTF8
 write-host "Using chrome from $env:chrome"
 
 Push-Location .github\avatars
-# For some reason we get a black background for clarius' avatar, so we exclude it
-Get-ChildItem *.svg -exclude clarius.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --chrome_path "$env:chrome" -v --size 38,38}
+Get-ChildItem *.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --chrome_path "$env:chrome" -v --size 38,38}
 Pop-Location
