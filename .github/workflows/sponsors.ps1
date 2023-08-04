@@ -1,3 +1,55 @@
+function Write-Organization {
+  [CmdletBinding()]
+  param ([Parameter(Mandatory, ValueFromPipeline)] $node)
+
+  $img = iwr ($node.avatarUrl + "&s=70");
+  $type = $img.Headers["Content-Type"];
+  $base64 = [convert]::ToBase64String($img.Content);
+  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
+	<foreignObject width='100%' height='100%'>
+		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
+			<style>
+        img {
+          border-style: none;
+          border-radius: 6px; 
+          box-shadow: 0 0 0 1px lightgrey;
+        }
+			</style>
+      <img width='35' height='35' src='data:$($type);base64,$($base64)' />   
+		</div>
+	</foreignObject>
+</svg>";
+
+  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
+  write-host "=> $($node.login).svg" -ForegroundColor Green;
+}
+
+function Write-User {
+  [CmdletBinding()]  
+  param ([Parameter(Mandatory, ValueFromPipeline)] $node)
+
+  $img = iwr ($node.avatarUrl + "&s=70");
+  $type = $img.Headers["Content-Type"];
+  $base64 = [convert]::ToBase64String($img.Content);
+  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
+	<foreignObject width='100%' height='100%'>
+		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
+			<style>
+        img {
+          border-style: none;
+          border-radius: 50% !important;
+          box-shadow: 0 0 0 1px lightgrey;
+        }            
+			</style>
+      <img width='35' height='35' src='data:$($type);base64,$($base64)' />
+		</div>
+	</foreignObject>
+</svg>";
+
+  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
+  write-host "=> $($node.login).svg" -ForegroundColor DarkGray;
+}
+
 gh auth status
 
 $query = gh api graphql --paginate -f owner='devlooped' -f query='
@@ -40,50 +92,20 @@ $users = $sponsors | where { $_.sponsorEntity.teamsUrl -eq $null } | select -Exp
 mkdir ".github/avatars" -ErrorAction Ignore
 
 foreach ($node in $organizations) {
-  $img = iwr ($node.avatarUrl + "&s=70");
-  $type = $img.Headers["Content-Type"];
-  $base64 = [convert]::ToBase64String($img.Content);
-  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
-	<foreignObject width='100%' height='100%'>
-		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
-			<style>
-        img {
-          border-style: none;
-          border-radius: 6px;
-          box-shadow: 0 0 0 1px lightgrey;
-        }
-			</style>
-      <img width='35' height='35' src='data:$($type);base64,$($base64)' />   
-		</div>
-	</foreignObject>
-</svg>";
-
-  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
-  write-host "=> $($node.login).svg" -ForegroundColor Green;
+  Write-Organization $node
 }
 
 foreach ($node in $users) {
-  $img = iwr ($node.avatarUrl + "&s=70");
-  $type = $img.Headers["Content-Type"];
-  $base64 = [convert]::ToBase64String($img.Content);
-  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
-	<foreignObject width='100%' height='100%'>
-		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
-			<style>
-        img {
-          border-style: none;
-          border-radius: 50% !important;
-          box-shadow: 0 0 0 1px lightgrey;
-        }            
-			</style>
-      <img width='35' height='35' src='data:$($type);base64,$($base64)' />
-		</div>
-	</foreignObject>
-</svg>";
-
-  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
-  write-host "=> $($node.login).svg" -ForegroundColor DarkGray;
+  Write-User $node
 }
+
+# add some hardcoded gold sponsors
+gh api graphql -f query='query { 
+  organization(login: "aws") {
+    login
+    avatarUrl
+  }
+}' | ConvertFrom-Json | select @{ Name='node'; Expression={$_.data.organization}} | select -ExpandProperty node | Write-Organization
 
 $links = "";
 
