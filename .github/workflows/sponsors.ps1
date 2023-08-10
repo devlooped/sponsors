@@ -100,12 +100,13 @@ foreach ($node in $users) {
 }
 
 # add some hardcoded gold sponsors
-gh api graphql -f query='query { 
-  organization(login: "aws") {
+$gold = @( "aws" );
+$gold | %{ gh api graphql -f query="query { 
+  organization(login: "`"$_`"") {
     login
     avatarUrl
   }
-}' | ConvertFrom-Json | select @{ Name='node'; Expression={$_.data.organization}} | select -ExpandProperty node | Write-Organization
+}" | ConvertFrom-Json | select @{ Name='node'; Expression={$_.data.organization}} | select -ExpandProperty node | Write-Organization }
 
 $links = "";
 
