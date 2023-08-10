@@ -56,7 +56,7 @@ function Write-User {
 
 gh auth status
 
-$query = gh api graphql --paginate -f owner='devlooped' -f query='
+$query = gh api graphql --paginate --jq '.data.organization.sponsorshipsAsMaintainer.nodes' -f owner='devlooped' -f query='
 query ($owner: String!, $endCursor: String) {
   organization(login: $owner) {
     sponsorshipsAsMaintainer(first: 100, after: $endCursor, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: false) {
@@ -85,11 +85,7 @@ query ($owner: String!, $endCursor: String) {
   }
 }'
 
-$sponsors = $query | 
-    ConvertFrom-Json | 
-    select @{ Name='nodes'; Expression={$_.data.organization.sponsorshipsAsMaintainer.nodes}} | 
-    select -ExpandProperty nodes;
-
+$sponsors = $query | ConvertFrom-Json
 $organizations = $sponsors | where { $_.sponsorEntity.teamsUrl -ne $null } | select -ExpandProperty sponsorEntity;
 $users = $sponsors | where { $_.sponsorEntity.teamsUrl -eq $null } | select -ExpandProperty sponsorEntity;
 
@@ -105,12 +101,12 @@ foreach ($node in $users) {
 
 # add some hardcoded gold sponsors
 $gold = @( "aws" );
-$gold | %{ gh api graphql -f query="query { 
-  organization(login: `"$_`") {
+$gold | %{ gh api graphql --jq '.data.organization' -f login=$_ -f query='query($login: String!) { 
+  organization(login: $login) {
     login
     avatarUrl
   }
-}" | ConvertFrom-Json | select @{ Name='node'; Expression={$_.data.organization}} | select -ExpandProperty node | Write-Organization }
+}' | ConvertFrom-Json | Write-Organization }
 
 $links = "";
 
