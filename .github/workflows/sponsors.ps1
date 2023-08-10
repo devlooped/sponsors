@@ -102,7 +102,7 @@ foreach ($node in $users) {
 # add some hardcoded gold sponsors
 $gold = @( "aws" );
 $gold | %{ gh api graphql -f query="query { 
-  organization(login: "`"$_`"") {
+  organization(login: `"$_`") {
     login
     avatarUrl
   }
