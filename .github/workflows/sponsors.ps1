@@ -1,11 +1,6 @@
 function Write-Organization {
   [CmdletBinding()]
   param ([Parameter(Mandatory, ValueFromPipeline)] $node)
-  # if $node.login or $node.AvatarUrl are null, return
-  # for some reason, with our explicit gold sponsors query, this fails 
-  # in CI but not locally :/
-  if ($node.login -eq $null -or $node.avatarUrl -eq $null) { return; }
-  
   $img = iwr ($node.avatarUrl + "&s=70");
   $type = $img.Headers["Content-Type"];
   $base64 = [convert]::ToBase64String($img.Content);
