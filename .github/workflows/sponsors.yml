@@ -11,6 +11,9 @@ on:
         description: Chrome Position
   schedule:
     - cron: "0 23 * * *"
+  push:
+    paths:
+      - .github/workflows/sponsors.ps1
 
 jobs:
   sponsors:
