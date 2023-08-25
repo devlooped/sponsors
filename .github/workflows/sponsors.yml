@@ -39,7 +39,7 @@ jobs:
           chrome-version: ${{ github.event.inputs.chrome || vars.chrome || '1070096' }} 
 
       - name: 🔽 html2image
-        run: pip install --upgrade html2image
+        run: pip install --force-reinstall -v html2image==2.0.3
 
       - name: 💜 sponsors
         shell: pwsh
