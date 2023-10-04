@@ -15,6 +15,9 @@ on:
     paths:
       - .github/workflows/sponsors.ps1
 
+permissions:
+  contents: write
+  
 jobs:
   sponsors:
     runs-on: windows-latest
@@ -50,16 +53,9 @@ jobs:
       - name: +Mᐁ includes
         uses: devlooped/actions-include@v1
 
-      - name: ✍ pull request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          base: main
-          branch: sponsors
-          delete-branch: true
-          labels: docs
-          author: ${{ env.BOT_AUTHOR }}
-          committer: ${{ env.BOT_AUTHOR }}
-          commit-message: "💜 Refresh sponsors"
-          title: "💜 Refresh sponsors"
-          body: "Sponsors list updated"
-          token: ${{ env.GH_TOKEN }}
+      - name: ✓ commit
+        continue-on-error: true
+        run: |
+          git add -A
+          git commit -m "💜 Refresh sponsors"
+          git push
