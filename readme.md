@@ -46,6 +46,7 @@ the convenient [footer.md](https://github.com/devlooped/sponsors/raw/main/footer
 [![Vezel](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/vezel-dev.png "Vezel")](https://github.com/vezel-dev)
 [![Michael Staib](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/michaelstaib.png "Michael Staib")](https://github.com/michaelstaib)
 [![ChilliCream](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/ChilliCream.png "ChilliCream")](https://github.com/ChilliCream)
+[![4OTC](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/4OTC.png "4OTC")](https://github.com/4OTC)
 
 
 <!-- sponsors.md -->

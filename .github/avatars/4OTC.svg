@@ -1,0 +1,14 @@
+<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
+	<foreignObject width='100%' height='100%'>
+		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
+			<style>
+        img {
+          border-style: none;
+          border-radius: 6px; 
+          box-shadow: 0 0 0 1px lightgrey;
+        }
+			</style>
+      <img width='35' height='35' src='data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDIBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIAEYARgMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APf6KKKACiiigAooooAKKKKACiiigAoorF169kWMWNtzPKCWx/CnerhBzlyozq1FTg5M2qKxvDJJ0nk5/eN/SvLNN0u4+MPiLV7/AFPUruHw/ZT/AGe0trZwocjvyCM4wScE/MB0FE4cknHsFKp7SCn3PbKK8WsLO88IeN5vANzql3PoWuWbraSyPmS3LKw4PQHII4GOVOKwtY8Bxad8TtF8Lx63qrWt/bmWSVphvU/vOnGP4B271BofQ1FeNeKY7/w7FoXw58O6pdfaNSlZ5ryV8ypEzeoxxwxOOcLjvV8/CG80Ga1v/CPiG6g1GNwZ/tsmY5h3yFX17HNAHq1FMi8wwoZgol2jeEOQD3wT2p9AEc8vkW8sxGfLQtj1wM1yVpqtugu57lJnu5wV3BRhRjgDmuxqK4UvayqoyxQgD8K2pVIxTTW5zV6MptSjK1vK5zmhXqtp01hGr/aGV2UgcdOK5P4Buh8C3kY4ddRfeO/+rjx/n2r0DQLaa003y54yj7ycH04rzd9A8XfD7xRqV94W02PVtG1J/Ne1LhWhfJOBznjJwRnjr0FFdp1HYMJGUaMVIX4hfvvjD4Hhi5mRxIwHXb5mf5K1P8U/8nB+FP8AryP/ALWq34R8K+INT8ayeNfF0MVtdJH5VnZIwbylwRk4JxwTxnOWJ4qzr/hzVrz4yeHtct7MvptramOafeoCN+94wTk/eXoO9ZHSY2unyv2j/Dzz8I1kQhPTlJgP/Hq9drgviP4Lv9f/ALP1rQpVi1zS33wbiAJBkHbk8ZBGRnjkg9awLqT4oeMXtdNksP8AhGrdJA11ewTlXbHZcNnHsPbJxSA9coqK2gFtawwCSSQRIEDyuWdsDGWJ5J9TUtABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//Z' />   
+		</div>
+	</foreignObject>
+</svg>
