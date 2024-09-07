@@ -109,10 +109,10 @@ foreach ($sponsor in $sponsors) {
   $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).png `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
 }
 
-$links | Out-File .\sponsors.md -Force -Encoding UTF8
+$links | Out-File ./sponsors.md -Force -Encoding UTF8
 
 write-host "Using chrome from $env:chrome"
 
-Push-Location .github\avatars
+Push-Location .github/avatars
 Get-ChildItem *.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --chrome_path "$env:chrome" -v --size 38,38}
 Pop-Location
