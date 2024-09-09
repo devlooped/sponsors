@@ -114,5 +114,5 @@ $links | Out-File ./sponsors.md -Force -Encoding UTF8
 write-host "Using chrome from $env:chrome"
 
 Push-Location .github/avatars
-Get-ChildItem *.svg | %{ python ../workflows/sponsors.py "$env:chrome" "$($_.Name)" "$($_.BaseName).png" }
+Get-ChildItem *.svg | %{ python ../workflows/sponsors.py "$env:chrome" "file://$($_.FullName)" "$($_.BaseName).png" }
 Pop-Location
