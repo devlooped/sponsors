@@ -4,7 +4,7 @@ function Write-Organization {
   $img = iwr ($node.avatarUrl + "&s=70");
   $type = $img.Headers["Content-Type"];
   $base64 = [convert]::ToBase64String($img.Content);
-  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
+  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background: transparent' fill='none' width='39' height='39'>
 	<foreignObject width='100%' height='100%'>
 		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
 			<style>
@@ -30,7 +30,7 @@ function Write-User {
   $img = iwr ($node.avatarUrl + "&s=70");
   $type = $img.Headers["Content-Type"];
   $base64 = [convert]::ToBase64String($img.Content);
-  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background-color: white' fill='none' width='38' height='38'>
+  $svg = "<svg xmlns='http://www.w3.org/2000/svg' style='background: transparent' fill='none' width='39' height='39'>
 	<foreignObject width='100%' height='100%'>
 		<div xmlns='http://www.w3.org/1999/xhtml' style='padding-top: 2px; padding-left: 2px;'>
 			<style>
@@ -109,10 +109,10 @@ foreach ($sponsor in $sponsors) {
   $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).png `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
 }
 
-$links | Out-File .\sponsors.md -Force -Encoding UTF8
+$links | Out-File ./sponsors.md -Force -Encoding UTF8
 
 write-host "Using chrome from $env:chrome"
 
-Push-Location .github\avatars
-Get-ChildItem *.svg | %{ html2image --html "$($_.Name)" --save "$($_.BaseName).png" --chrome_path "$env:chrome" -v --size 38,38}
+Push-Location .github/avatars
+Get-ChildItem *.svg | %{ python ../workflows/sponsors.py "$env:chrome" "$($_.Name)" "$($_.BaseName).png" }
 Pop-Location
