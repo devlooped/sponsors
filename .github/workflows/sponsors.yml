@@ -12,7 +12,7 @@ on:
     - cron: "0 23 * * *"
   push:
     paths:
-      - .github/workflows/sponsors.ps1
+      - .github/workflows/sponsors.*
 
 permissions:
   contents: write
