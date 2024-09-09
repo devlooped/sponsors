@@ -42,7 +42,9 @@ jobs:
           install-chromedriver: true
 
       - name: 🔽 html2image
-        run: pip install --force-reinstall -v html2image==2.0.3
+        run: |
+          pip install --force-reinstall -v html2image==2.0.3
+          sudo apt-get install upower
 
       - name: 💜 sponsors
         shell: pwsh
