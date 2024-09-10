@@ -51,11 +51,13 @@ function Write-User {
 
 gh auth status
 
-if (-not $env:GITHUB_REPOSITORY_OWNER) {
+$sponsorable = $env:sponsorable
+
+if ([string]::IsNullOrEmpty($sponsorable)) {
   throw "Environment variable 'GITHUB_REPOSITORY_OWNER' is required since it is the sponsorable account."
 }
 
-$sponsorable = $env.GITHUB_REPOSITORY_OWNER
+write-host "Sponsorable account: $sponsorable" -ForegroundColor Cyan
 
 $query = gh api graphql --paginate --jq '.data.organization.sponsorshipsAsMaintainer.nodes' -f owner=$sponsorable -f query='
 query ($owner: String!, $endCursor: String) {

@@ -49,6 +49,7 @@ jobs:
         run: ./.github/workflows/sponsors.ps1
         env:
           chrome: ${{ steps.chrome.outputs.chrome-path }}
+          sponsorable: ${{ github.repository_owner }}
 
       - name: +Mᐁ includes
         uses: devlooped/actions-include@v1
