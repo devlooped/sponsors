@@ -54,7 +54,7 @@ gh auth status
 $sponsorable = $env:sponsorable
 
 if ([string]::IsNullOrEmpty($sponsorable)) {
-  throw "Environment variable 'GITHUB_REPOSITORY_OWNER' is required since it is the sponsorable account."
+  throw "Environment variable 'sponsorable' is required."
 }
 
 write-host "Sponsorable account: $sponsorable" -ForegroundColor Cyan
