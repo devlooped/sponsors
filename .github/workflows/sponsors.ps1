@@ -55,7 +55,9 @@ if (-not $env:GITHUB_REPOSITORY_OWNER) {
   throw "Environment variable 'GITHUB_REPOSITORY_OWNER' is required since it is the sponsorable account."
 }
 
-$query = gh api graphql --paginate --jq '.data.organization.sponsorshipsAsMaintainer.nodes' -f owner=$env:GITHUB_REPOSITORY_OWNER -f query='
+$sponsorable = $env.GITHUB_REPOSITORY_OWNER
+
+$query = gh api graphql --paginate --jq '.data.organization.sponsorshipsAsMaintainer.nodes' -f owner=$sponsorable -f query='
 query ($owner: String!, $endCursor: String) {
   organization(login: $owner) {
     sponsorshipsAsMaintainer(first: 100, after: $endCursor, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: false) {
@@ -110,7 +112,7 @@ $gold | %{ gh api graphql --jq '.data.organization' -f login=$_ -f query='query(
 $links = "";
 
 foreach ($sponsor in $sponsors) {
-  $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/$($env.GITHUB_REPOSITORY_OWNER))/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).png `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
+  $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/$sponsorable/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).png `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
 }
 
 $links | Out-File ./sponsors.md -Force -Encoding UTF8
