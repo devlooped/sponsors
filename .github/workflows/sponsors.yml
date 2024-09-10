@@ -24,8 +24,8 @@ jobs:
       - name: 🤖 defaults
         uses: devlooped/actions-bot@v1
         with:
-          name: ${{ secrets.BOT_NAME }}
-          email: ${{ secrets.BOT_EMAIL }}
+          name: ${{ vars.BOT_NAME || secrets.BOT_NAME }}
+          email: ${{ vars.BOT_EMAIL || secrets.BOT_EMAIL }}
           gh_token: ${{ secrets.GH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 

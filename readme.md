@@ -7,6 +7,11 @@ The list can be included directly by using the [resolve file includes](https://g
 action and pointing the include to the [sponsors.md](https://github.com/devlooped/sponsors/raw/main/sponsors.md) or 
 the convenient [footer.md](https://github.com/devlooped/sponsors/raw/main/footer.md) (as `raw` links).
 
+To reuse this in your own fork, add a secret named `GH_TOKEN` that has permissions to query your sponsorships 
+(via the [GitHub CLI](https://cli.github.com)) and update files in your repository. The `BOT_NAME` and `BOT_EMAIL` 
+repo/org secrets or variables can be used to set the committer name and email.
+
+
 <!-- include sponsors.md -->
 [![Clarius Org](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/clarius.png "Clarius Org")](https://github.com/clarius)
 [![Kirill Osenkov](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/KirillOsenkov.png "Kirill Osenkov")](https://github.com/KirillOsenkov)
