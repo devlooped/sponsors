@@ -4,12 +4,12 @@ from html2image import Html2Image
 
 chrome = sys.argv[1]
 # read entire contents of file in args[2] as input
-with open(sys.argv[2], 'r') as file:
+with open(sys.argv[2], 'r', encoding='utf-8') as file:
     input = file.read()
     
 output = sys.argv[3]
 
-hti = Html2Image(size=(38,38), browser_executable=chrome)
+hti = Html2Image(size=(39,39), browser_executable=chrome)
 hti.browser.print_command = True
 hti.browser.flags = ['--hide-scrollbars', '--default-background-color=00000000', '--disable-remote-debugging', '--no-sandbox'];
 

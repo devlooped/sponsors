@@ -19,7 +19,7 @@ function Write-Organization {
 	</foreignObject>
 </svg>";
 
-  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
+  $svg | Set-Content -Encoding UTF8 -Path ".github/avatars/$($node.login).svg";
   write-host "=> $($node.login).svg" -ForegroundColor Green;
 }
 
@@ -45,7 +45,7 @@ function Write-User {
 	</foreignObject>
 </svg>";
 
-  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
+  $svg | Set-Content -Encoding UTF8 -Path ".github/avatars/$($node.login).svg";
   write-host "=> $($node.login).svg" -ForegroundColor DarkGray;
 }
 
