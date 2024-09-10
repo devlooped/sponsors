@@ -19,7 +19,7 @@ function Write-Organization {
 	</foreignObject>
 </svg>";
 
-  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
+  $svg | Set-Content -Encoding UTF8 -Path ".github/avatars/$($node.login).svg";
   write-host "=> $($node.login).svg" -ForegroundColor Green;
 }
 
@@ -45,13 +45,21 @@ function Write-User {
 	</foreignObject>
 </svg>";
 
-  $svg | Set-Content -Path ".github/avatars/$($node.login).svg";
+  $svg | Set-Content -Encoding UTF8 -Path ".github/avatars/$($node.login).svg";
   write-host "=> $($node.login).svg" -ForegroundColor DarkGray;
 }
 
 gh auth status
 
-$query = gh api graphql --paginate --jq '.data.organization.sponsorshipsAsMaintainer.nodes' -f owner='devlooped' -f query='
+$sponsorable = $env:sponsorable
+
+if ([string]::IsNullOrEmpty($sponsorable)) {
+  throw "Environment variable 'sponsorable' is required."
+}
+
+write-host "Sponsorable account: $sponsorable" -ForegroundColor Cyan
+
+$query = gh api graphql --paginate --jq '.data.organization.sponsorshipsAsMaintainer.nodes' -f owner=$sponsorable -f query='
 query ($owner: String!, $endCursor: String) {
   organization(login: $owner) {
     sponsorshipsAsMaintainer(first: 100, after: $endCursor, orderBy: {field: CREATED_AT, direction: ASC}, includePrivate: false) {
@@ -106,14 +114,11 @@ $gold | %{ gh api graphql --jq '.data.organization' -f login=$_ -f query='query(
 $links = "";
 
 foreach ($sponsor in $sponsors) {
-  $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).png `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
+  $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/$sponsorable/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).png `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
 }
 
 $links | Out-File ./sponsors.md -Force -Encoding UTF8
 
-write-host "Using chrome from $env:chrome"
-
 Push-Location .github/avatars
-$flags = '--hide-scrollbars --default-background-color=00000000 --headless --disable-remote-debugging --no-sandbox'
-Get-ChildItem *.svg | %{ html2image --css ../workflows/sponsors.css --html "$($_.Name)" --save "$($_.BaseName).png" --chrome_path "$env:chrome" --custom_flags $flags -v --size 39,39}
+Get-ChildItem *.svg | %{ python ../workflows/sponsors.py "$($_.Name)" "$($_.BaseName).png" }
 Pop-Location

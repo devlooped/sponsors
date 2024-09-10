@@ -2,12 +2,6 @@
 name: sponsors
 on:
   workflow_dispatch:
-    inputs:
-      chrome:
-        # Lookup desired version at https://chromiumdash.appspot.com/releases?platform=Windows
-        # Then find the closest position to the Base Branch Position at 
-        # https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/
-        description: Chrome Position
   schedule:
     - cron: "0 23 * * *"
   push:
@@ -24,8 +18,8 @@ jobs:
       - name: 🤖 defaults
         uses: devlooped/actions-bot@v1
         with:
-          name: ${{ secrets.BOT_NAME }}
-          email: ${{ secrets.BOT_EMAIL }}
+          name: ${{ vars.BOT_NAME || secrets.BOT_NAME }}
+          email: ${{ vars.BOT_EMAIL || secrets.BOT_EMAIL }}
           gh_token: ${{ secrets.GH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -34,22 +28,15 @@ jobs:
         with: 
           token: ${{ env.GH_TOKEN }}
 
-      - name: 🌐 chrome
-        uses: browser-actions/setup-chrome@v1
-        id: chrome
-        with:
-          chrome-version: ${{ github.event.inputs.chrome || vars.chrome || '1331469' }} 
-          install-dependencies: true
-          install-chromedriver: true
-
       - name: 🔽 html2image
-        run: pip install --force-reinstall -v html2image==2.0.5
+        run: pip install --force-reinstall -v html2image==2.0.3
 
       - name: 💜 sponsors
         shell: pwsh
         run: ./.github/workflows/sponsors.ps1
         env:
           chrome: ${{ steps.chrome.outputs.chrome-path }}
+          sponsorable: ${{ github.repository_owner }}
 
       - name: +Mᐁ includes
         uses: devlooped/actions-include@v1
