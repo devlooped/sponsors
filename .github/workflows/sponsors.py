@@ -11,7 +11,7 @@ output = sys.argv[3]
 
 hti = Html2Image(size=(38,38), browser_executable=chrome)
 hti.browser.print_command = True
-hti.browser.flags = ['--hide-scrollbars', '--default-background-color=00000000', '--headless', '--disable-remote-debugging', '--no-sandbox'];
+hti.browser.flags = ['--hide-scrollbars', '--default-background-color=00000000', '--disable-remote-debugging', '--no-sandbox'];
 
 # specify css with zero margin and padding and transparent html background
 css = '''
@@ -22,5 +22,5 @@ html, body {
 }
 '''
 
-print(f'{input} -> {output}')
+print(f'{sys.argv[2]} -> {output}')
 hti.screenshot(html_str=input, css_str=css, save_as=output)

@@ -118,6 +118,5 @@ $links | Out-File ./sponsors.md -Force -Encoding UTF8
 write-host "Using chrome from $env:chrome"
 
 Push-Location .github/avatars
-$flags = '--hide-scrollbars --default-background-color=00000000 --headless --disable-remote-debugging --no-sandbox'
-Get-ChildItem *.svg | %{ html2image --css ../workflows/sponsors.css --html "$($_.Name)" --save "$($_.BaseName).png" --chrome_path "$env:chrome" --custom_flags $flags -v --size 39,39}
+Get-ChildItem *.svg | %{ python ../workflows/sponsors.py "$($_.Name)" "$($_.BaseName).png" }
 Pop-Location
