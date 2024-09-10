@@ -3,6 +3,7 @@ import sys
 from html2image import Html2Image
 
 chrome = sys.argv[1]
+
 # read entire contents of file in args[2] as input
 with open(sys.argv[2], 'r', encoding='utf-8') as file:
     input = file.read()
