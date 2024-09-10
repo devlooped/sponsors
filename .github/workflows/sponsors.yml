@@ -43,7 +43,7 @@ jobs:
           install-chromedriver: true
 
       - name: 🔽 html2image
-        run: pip install --force-reinstall -v html2image==2.0.3
+        run: pip install --force-reinstall -v html2image==2.0.5
 
       - name: 💜 sponsors
         shell: pwsh
