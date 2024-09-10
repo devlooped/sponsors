@@ -11,7 +11,7 @@ chrome = sys.argv[1]
 
 hti = Html2Image(size=(39,39), browser_executable=chrome)
 hti.browser.print_command = True
-hti.browser.flags = ['--hide-scrollbars', '--default-background-color=00000000', '--disable-remote-debugging', '--no-sandbox'];
+hti.browser.flags = ['--headless', '--hide-scrollbars', '--default-background-color=00000000', '--disable-remote-debugging', '--no-sandbox'];
 
 # specify css with zero margin and padding and transparent html background
 css = '''
