@@ -39,8 +39,6 @@ jobs:
         id: chrome
         with:
           chrome-version: ${{ github.event.inputs.chrome || vars.chrome || '1331469' }} 
-          install-dependencies: true
-          install-chromedriver: true
 
       - name: 🔽 html2image
         run: pip install --force-reinstall -v html2image==2.0.5
