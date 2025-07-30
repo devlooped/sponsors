@@ -44,6 +44,7 @@ repo/org secrets or variables can be used to set the committer name and email.
 [![Michael Hagedorn](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/Eule02.png "Michael Hagedorn")](https://github.com/Eule02)
 [![Alex Rønne Petersen](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/alexrp.png "Alex Rønne Petersen")](https://github.com/alexrp)
 [![](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/henkmartijn.png "")](https://github.com/henkmartijn)
+[![Sebastien Lebreton](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/sailro.png "Sebastien Lebreton")](https://github.com/sailro)
 
 
 <!-- sponsors.md -->
