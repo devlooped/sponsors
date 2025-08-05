@@ -33,6 +33,7 @@
 [![Alex Rønne Petersen](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/alexrp.png "Alex Rønne Petersen")](https://github.com/alexrp)
 [![](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/henkmartijn.png "")](https://github.com/henkmartijn)
 [![Sebastien Lebreton](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/sailro.png "Sebastien Lebreton")](https://github.com/sailro)
+[![torutek](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/torutek.png "torutek")](https://github.com/torutek)
 
 
 <!-- sponsors.md -->
