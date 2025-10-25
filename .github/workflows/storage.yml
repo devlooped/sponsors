@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       file:
-        description: 'Relative file path to upload'
+        description: 'Relative file path to upload (supports glob patterns)'
         required: false
         type: string
   
@@ -53,6 +53,11 @@ jobs:
           AZCOPY_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         run: |
           $files = $env:CHANGED -split ' '
+          if ($files -contains '*') {
+              $pattern = $files -join ','
+              $files = Get-ChildItem -Path . -Recurse -Include $pattern | ForEach-Object { $_.FullName }
+          }
+
           foreach ($file in $files) {
               if (-not (test-path $file -PathType Leaf)) { continue }
               $blob = "$env:AZURE_BLOB_URL$([System.IO.Path]::GetFileName($file))"
