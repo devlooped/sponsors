@@ -1,0 +1,67 @@
+name: storage
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: 'Relative file path to upload'
+        required: false
+        type: string
+  
+  push:
+    branches:
+      - main
+    paths:
+      - '*/avatars/*'
+
+defaults:
+  run:
+    shell: pwsh
+
+permissions:
+  id-token: write
+  contents: read
+    
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      # Azure App registration with federeted credentials and Storage Blob Data Contributor role in target AZURE_BLOB_URL
+      # See https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust-user-assigned-managed-identity?pivots=identity-wif-mi-methods-azp#github-actions-deploying-azure-resources
+      - name: 🔓 azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔎 changes
+        id: changes
+        uses: tj-actions/changed-files@v46.0.3
+        with:
+            files: '*/avatar/*'
+
+      - name: 🔼 upload
+        if: steps.changes.outputs.all_changed_files != '' || github.event.inputs.file != ''
+        env:
+          CHANGED: ${{ steps.changes.outputs.all_changed_files || github.event.inputs.file }}
+          AZURE_BLOB_URL: ${{ vars.AZURE_BLOB_URL }}
+          AZCOPY_AUTO_LOGIN_TYPE: AZCLI
+          AZCOPY_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        run: |
+          $files = $env:CHANGED -split ' '
+          foreach ($file in $files) {
+              if (-not (test-path $file -PathType Leaf)) { continue }
+              $blob = "$env:AZURE_BLOB_URL$([System.IO.Path]::GetFileName($file))"
+              $result = & azcopy copy $file $blob --overwrite=ifSourceNewer
+
+              if ($LASTEXITCODE -ne 0) {
+                  write-error "Failed to upload $file to blob storage: $result"
+                  exit $LASTEXITCODE
+              }
+
+              write-output "✅ $file > $blob"
+          }          
