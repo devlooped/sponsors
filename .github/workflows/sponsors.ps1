@@ -114,7 +114,30 @@ $gold | %{ gh api graphql --jq '.data.organization' -f login=$_ -f query='query(
 $links = "";
 
 foreach ($sponsor in $sponsors) {
-  $links += "[![$($sponsor.sponsorEntity.name)](https://raw.githubusercontent.com/$sponsorable/sponsors/main/.github/avatars/$($sponsor.sponsorEntity.login).png `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
+  $imgUrl = $sponsor.sponsorEntity.avatarUrl
+  if ($imgUrl -notmatch "\?") {
+    $imgUrl += "?s=39"
+  } else {
+    $imgUrl += "&s=39"
+  }
+  $img = Invoke-WebRequest $imgUrl
+  Add-Type -AssemblyName System.Drawing
+  $ms = New-Object System.IO.MemoryStream
+  $ms.Write($img.Content, 0, $img.Content.Length)
+  $image = [System.Drawing.Image]::FromStream($ms)
+  
+  if ($image.Width -ne 39 -or $image.Height -ne 39) {
+    if ($sponsor.sponsorEntity.teamsUrl) {
+      $imgUrl = "https://raw.githubusercontent.com/$sponsorable/sponsors/main/assets/team.png"
+    } else {
+      $imgUrl = "https://raw.githubusercontent.com/$sponsorable/sponsors/main/assets/user.png"
+    }
+  }
+  
+  $image.Dispose()
+  $ms.Dispose()
+
+  $links += "[![$($sponsor.sponsorEntity.name)]($imgUrl `"$($sponsor.sponsorEntity.name)`")](https://github.com/$($sponsor.sponsorEntity.login))`n";
 }
 
 $links | Out-File ./sponsors.md -Force -Encoding UTF8
