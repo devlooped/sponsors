@@ -128,9 +128,9 @@ foreach ($sponsor in $sponsors) {
   
   if ($image.Width -ne 39 -or $image.Height -ne 39) {
     if ($sponsor.sponsorEntity.teamsUrl) {
-      $imgUrl = "https://raw.githubusercontent.com/$sponsorable/sponsors/main/assets/team.png"
+      $imgUrl = "https://avatars.githubusercontent.com/devlooped-team?s=39"
     } else {
-      $imgUrl = "https://raw.githubusercontent.com/$sponsorable/sponsors/main/assets/user.png"
+      $imgUrl = "https://avatars.githubusercontent.com/devlooped-user?s=39"
     }
   }
   
