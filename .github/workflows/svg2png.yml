@@ -1,19 +1,17 @@
 # refresh list of sponsors
-name: sponsors
+name: svg2png
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 23 * * *"
   push:
     paths:
-      - .github/workflows/sponsors.*
+      - .github/avatars/*.svg
 
 permissions:
   contents: write
-  
+
 jobs:
   sponsors:
-    runs-on: windows-latest
+    runs-on: macOS-latest
     timeout-minutes: 5
     steps:
       - name: 🤖 defaults
@@ -29,19 +27,17 @@ jobs:
         with: 
           token: ${{ env.GH_TOKEN }}
 
-      - name: 💜 sponsors
-        shell: pwsh
-        run: ./.github/workflows/sponsors.ps1
-        env:
-          chrome: ${{ steps.chrome.outputs.chrome-path }}
-          sponsorable: ${{ github.repository_owner }}
+      - name: 🔽 html2image
+        run: pip install --force-reinstall -v html2image==2.0.3
 
-      - name: +Mᐁ includes
-        uses: devlooped/actions-include@v1
+      - name: ✏️ avatars
+        shell: pwsh
+        working-directory: .github/avatars
+        run: gci *.svg | %{ python ../workflows/sponsors.py "$($_.Name)" "$($_.BaseName).png" }
 
       - name: ✓ commit
         continue-on-error: true
         run: |
           git add -A
-          git commit -m "💜 Refresh sponsors"
+          git commit -m "✏️ Update avatars"
           git push

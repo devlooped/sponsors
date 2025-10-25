@@ -141,7 +141,3 @@ foreach ($sponsor in $sponsors) {
 }
 
 $links | Out-File ./sponsors.md -Force -Encoding UTF8
-
-Push-Location .github/avatars
-Get-ChildItem *.svg | %{ python ../workflows/sponsors.py "$($_.Name)" "$($_.BaseName).png" }
-Pop-Location
