@@ -42,6 +42,7 @@ repo/org secrets or variables can be used to set the committer name and email.
 [![mccaffers](https://avatars.githubusercontent.com/u/16667079?u=739e110e62a75870c981640447efa5eb2cb3bc8f&v=4&s=39 "mccaffers")](https://github.com/mccaffers)
 [![Cleosia](https://avatars.githubusercontent.com/u/85127128?u=3c889baa39bbe3607998c931490bd67c6ed854f2&v=4&s=39 "Cleosia")](https://github.com/cleosia)
 [![rigu1](https://avatars.githubusercontent.com/devlooped-user?s=39 "rigu1")](https://github.com/Rigu1)
+[![Seika Logiciel](https://avatars.githubusercontent.com/u/2564602?v=4&s=39 "Seika Logiciel")](https://github.com/SeikaLogiciel)
 
 
 <!-- sponsors.md -->
